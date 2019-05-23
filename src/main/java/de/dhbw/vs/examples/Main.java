@@ -19,6 +19,7 @@ public class Main {
 
 		// Output a simple log statement
 		log.info("Hallo Welt!");
+
 	}
 
 }
