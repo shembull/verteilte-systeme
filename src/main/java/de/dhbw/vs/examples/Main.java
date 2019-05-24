@@ -34,11 +34,23 @@ public class Main {
 			String str;
 			InetAddress inet = c.getInet();
 
+			Thread th = new Thread(() -> {
+				while (true){
+					try {
+						s.receive();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+
+			th.start();
+			System.out.println(th.getId());
+
 			for (int i = 0; i < 20; i++) {
 				str = "Hallo Welt # " + i + " @" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ").format(new java.util.Date());
 				byte[] t = str.getBytes();
 				c.send(new DatagramPacket(t, t.length, inet, 11111));
-				s.receive();
 				TimeUnit.MILLISECONDS.sleep(500);
 			}
 
