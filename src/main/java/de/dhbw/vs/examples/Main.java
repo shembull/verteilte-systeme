@@ -34,7 +34,7 @@ public class Main {
 			String str;
 			InetAddress inet = c.getInet();
 
-			Thread th = new Thread(() -> {
+			new Thread(() -> {
 				while (true){
 					try {
 						s.receive();
@@ -42,14 +42,12 @@ public class Main {
 						e.printStackTrace();
 					}
 				}
-			});
-
-			th.start();
+			}).start();
 
 			for (int i = 0; i < 20; i++) {
 				str = "Hallo Welt # " + i + " @" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ").format(new java.util.Date());
-				byte[] t = str.getBytes();
-				c.send(new DatagramPacket(t, t.length, inet, 11111));
+				byte[] b = str.getBytes();
+				c.send(new DatagramPacket(b, b.length, inet, 11111));
 				TimeUnit.MILLISECONDS.sleep(500);
 			}
 
