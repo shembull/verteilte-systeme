@@ -45,7 +45,6 @@ public class Main {
 			});
 
 			th.start();
-			System.out.println(th.getId());
 
 			for (int i = 0; i < 20; i++) {
 				str = "Hallo Welt # " + i + " @" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ").format(new java.util.Date());
