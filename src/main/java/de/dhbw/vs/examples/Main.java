@@ -11,6 +11,8 @@ import de.dhbw.vs.utils.logging.Logging;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -30,12 +32,18 @@ public class Main {
 		try {
 			Client c = new Client(12345);
 			Server s = new Server(11111);
-			String str = "Test";
-			byte[] t = str.getBytes();
-			c.send(new DatagramPacket(t, 4, c.getInet(), 11111));
-			s.receive();
+			String str;
+			InetAddress inet = c.getInet();
 
-		} catch (IOException e) {
+			for (int i = 0; i < 20; i++) {
+				str = "Hallo Welt # " + i + " @" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ").format(new java.util.Date());
+				byte[] t = str.getBytes();
+				c.send(new DatagramPacket(t, t.length, inet, 11111));
+				s.receive();
+				TimeUnit.MILLISECONDS.sleep(500);
+			}
+
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
