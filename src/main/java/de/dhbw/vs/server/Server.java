@@ -22,14 +22,14 @@ public class Server {
     public Server(int port) throws SocketException, UnknownHostException {
         log = LoggerFactory.getLogger(Server.class);
         socket = new DatagramSocket(port, Inet4Address.getLocalHost());
-        byte[] buf = new byte[1000];
-        packet = new DatagramPacket(buf, 1000);
+        byte[] buf = new byte[500];
+        packet = new DatagramPacket(buf, 500);
     }
     public void receive() throws IOException {
 
         socket.receive(packet);
         log.info(new String(packet.getData()));
-        packet.setData(new byte[1000]);
+        //packet.setData(new byte[150]);
 
     }
 }
