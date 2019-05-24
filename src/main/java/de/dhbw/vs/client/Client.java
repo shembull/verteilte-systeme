@@ -1,4 +1,4 @@
-package de.dhbw.vs;
+package de.dhbw.vs.client;
 
 import java.io.IOException;
 import java.net.*;

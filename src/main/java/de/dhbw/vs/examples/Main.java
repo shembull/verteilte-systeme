@@ -1,7 +1,7 @@
 package de.dhbw.vs.examples;
 
-import de.dhbw.vs.Client;
-import de.dhbw.vs.Server;
+import de.dhbw.vs.client.Client;
+import de.dhbw.vs.server.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +10,6 @@ import de.dhbw.vs.utils.logging.Logging;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.util.concurrent.TimeUnit;
 

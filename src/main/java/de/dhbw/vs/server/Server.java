@@ -1,8 +1,8 @@
-package de.dhbw.vs;
+package de.dhbw.vs.server;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.Arrays;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
