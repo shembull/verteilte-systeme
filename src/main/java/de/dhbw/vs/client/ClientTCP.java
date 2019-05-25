@@ -1,8 +1,6 @@
 package de.dhbw.vs.client;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -30,7 +28,7 @@ public class ClientTCP {
     }
 
     public void send(String data) throws IOException {
-        if (this.socket.isOutputShutdown()){
+        if (this.socket.isClosed()){
             this.socket = new Socket(InetAddress.getLocalHost(), this.port);
         }
         //log.debug("Creating writer");
@@ -47,6 +45,14 @@ public class ClientTCP {
         writer.flush();
         //log.debug("Writer flushed");
         this.socket.shutdownOutput();
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        //log.debug("Start reading data");
+        while (reader.read() > -1){
+            //log.debug(Integer.toString(reader.read()));
+            log.info(reader.readLine());
+        }
+        this.socket.close();
     }
 
 }

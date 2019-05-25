@@ -1,9 +1,6 @@
 package de.dhbw.vs.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -62,6 +59,14 @@ public class ServerTCP {
             log.info(reader.readLine());
         }
         //log.debug("Finished reading data");
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(
+                        this.socket.getOutputStream()
+                )
+        );
+
+        writer.write(" Anfrage verarbeitet\n");
+        writer.flush();
     }
 
     private boolean checkConState(){

@@ -72,7 +72,7 @@ public class Main {
 			String str;
 
 			for (int i = 0; i < 20; i++) {
-				str = "Hallo Welt # " + i + " @" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ").format(new java.util.Date()) + "\n";
+				str = " Hallo Welt # " + i + " @" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ").format(new java.util.Date()) + "\n";
 				clientTCP.send(str);
 				TimeUnit.MILLISECONDS.sleep(500);
 			}
