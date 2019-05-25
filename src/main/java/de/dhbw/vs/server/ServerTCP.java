@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -20,22 +21,47 @@ public class ServerTCP {
     private InputStream inputStream;
     private Logger log;
 
+
     static {
         Logging.setLoggingDefaults(LogLevel.DEBUG, "[%-5p; %c{1}::%M] %m%n");
     }
 
     public ServerTCP(int port, int backlog) throws IOException {
-        serverSocket = new ServerSocket(port, backlog);
-        socket = serverSocket.accept();
-        inputStream = socket.getInputStream();
+        log = LoggerFactory.getLogger(ServerTCP.class);
+        serverSocket = new ServerSocket(port, backlog, InetAddress.getLocalHost());
+        this.exceptNewClient();
     }
 
-    public void read() throws IOException {
+    private void exceptNewClient() {
+        new Thread(() -> {
+            try {
+                this.socket = serverSocket.accept();
+                if (!this.checkConState()) {
+                    log.warn("Socket is not connected");
+                }
+                else {
+                    log.warn("Socket is connected");
+                    inputStream = socket.getInputStream();
+                    this.read();
+                    this.socket.close();
+                    this.socket = null;
+                    this.exceptNewClient();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private void read() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         while (inputStream.read() != -1){
             log.info(reader.readLine());
         }
     }
 
-
+    private boolean checkConState(){
+        return this.socket.isConnected();
+    }
 }

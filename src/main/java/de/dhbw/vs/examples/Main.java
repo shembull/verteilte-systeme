@@ -2,6 +2,7 @@ package de.dhbw.vs.examples;
 
 import de.dhbw.vs.client.Client;
 import de.dhbw.vs.server.Server;
+import de.dhbw.vs.server.ServerTCP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +29,9 @@ public class Main {
 		/*log.info("Hallo Welt!");
 		System.out.println("Hallo Welt!".getBytes());*/
 
+		// task 2-1
+		//////////////////////////////////////////////////////////////////////////////////////
+		/*
 		try {
 			Client c = new Client(12345);
 			Server s = new Server(11111);
@@ -53,6 +57,18 @@ public class Main {
 			}
 
 		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+		*/
+		///////////////////////////////////////////////////////////////////////////////////////////
+
+		// task 2-2
+		//////////////////////////////////////////////////////////////////////////////////////////
+		ServerTCP serverTCP;
+		try {
+			serverTCP = new ServerTCP(11111, 1000);
+			//log.info(Boolean.toString(serverTCP.checkConState()));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
