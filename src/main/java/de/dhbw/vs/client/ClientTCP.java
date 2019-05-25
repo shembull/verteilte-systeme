@@ -16,6 +16,7 @@ public class ClientTCP {
 
     private Socket socket;
     private Logger log;
+    private int port;
 
 
     static {
@@ -23,25 +24,29 @@ public class ClientTCP {
     }
 
     public ClientTCP(int port) throws IOException {
-        log = LoggerFactory.getLogger(ClientTCP.class);
-        this.socket = new Socket(InetAddress.getLocalHost(), port);
+        this.log = LoggerFactory.getLogger(ClientTCP.class);
+        this.port = port;
+        this.socket = new Socket(InetAddress.getLocalHost(), this.port);
     }
 
     public void send(String data) throws IOException {
-        log.debug("Creating writer");
+        if (this.socket.isOutputShutdown()){
+            this.socket = new Socket(InetAddress.getLocalHost(), this.port);
+        }
+        //log.debug("Creating writer");
         BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(
                         this.socket.getOutputStream()
                 )
         );
-        log.debug("Writer created");
-        log.debug("Writing data...");
+        //log.debug("Writer created");
+        //log.debug("Writing data...");
         writer.write(data);
-        log.debug("Data written");
-        log.debug("Flushing writer...");
+        //log.debug("Data written");
+        //log.debug("Flushing writer...");
         writer.flush();
-        log.debug("Writer flushed");
-        this.socket.close();
+        //log.debug("Writer flushed");
+        this.socket.shutdownOutput();
     }
 
 }

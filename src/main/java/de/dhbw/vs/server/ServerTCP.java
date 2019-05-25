@@ -40,7 +40,7 @@ public class ServerTCP {
                     log.warn("Socket is not connected");
                 }
                 else {
-                    log.debug("Socket is connected");
+                    //log.debug("Socket is connected");
                     this.inputStream = this.socket.getInputStream();
                     this.read();
                     this.socket.close();
@@ -56,12 +56,12 @@ public class ServerTCP {
 
     private void read() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        log.debug("Start reading data");
+        //log.debug("Start reading data");
         while (reader.read() > -1){
-            log.debug(Integer.toString(reader.read()));
+            //log.debug(Integer.toString(reader.read()));
             log.info(reader.readLine());
         }
-        log.debug("Finished reading data");
+        //log.debug("Finished reading data");
     }
 
     private boolean checkConState(){

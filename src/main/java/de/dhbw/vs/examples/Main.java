@@ -67,13 +67,12 @@ public class Main {
 		//////////////////////////////////////////////////////////////////////////////////////////
 		ClientTCP clientTCP;
 		try {
-			new ServerTCP(11111, 1000);
+			new ServerTCP(11111, 500);
 			clientTCP = new ClientTCP(11111);
 			String str;
 
 			for (int i = 0; i < 20; i++) {
 				str = "Hallo Welt # " + i + " @" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ").format(new java.util.Date()) + "\n";
-				//str = "djfnriena.qlwuebdhstarwtsbdkepwirtzstarcbemböptisqmdjfnriena.qlwuebdhstarwtsbdkepwirtzstarcbemböptisqmdjfnriena.qlwuebdhstarwtsbdkepwirtzstarcbemböptisqmdjfnriena.qlwuebdhstarwtsbdkepwirtzstarcbemböptisqm";
 				clientTCP.send(str);
 				TimeUnit.MILLISECONDS.sleep(500);
 			}
