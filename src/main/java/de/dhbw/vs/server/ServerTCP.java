@@ -23,9 +23,9 @@ public class ServerTCP {
         Logging.setLoggingDefaults(LogLevel.DEBUG, "[%-5p; %c{1}::%M] %m%n");
     }
 
-    public ServerTCP(int port, int backlog) throws IOException {
+    public ServerTCP(int port, int backlog, InetAddress inetAddress) throws IOException {
         log = LoggerFactory.getLogger(ServerTCP.class);
-        serverSocket = new ServerSocket(port, backlog, InetAddress.getLocalHost());
+        serverSocket = new ServerSocket(port, backlog, inetAddress);
         this.exceptNewClient();
     }
 

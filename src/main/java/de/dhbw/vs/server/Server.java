@@ -19,9 +19,9 @@ public class Server {
         Logging.setLoggingDefaults(LogLevel.DEBUG, "[%-5p; %c{1}::%M] %m%n");
     }
 
-    public Server(int port) throws SocketException, UnknownHostException {
+    public Server(int port, InetAddress inetAddress) throws SocketException {
         log = LoggerFactory.getLogger(Server.class);
-        socket = new DatagramSocket(port, Inet4Address.getLocalHost());
+        socket = new DatagramSocket(port, inetAddress);
         byte[] buf = new byte[500];
         packet = new DatagramPacket(buf, 500);
     }

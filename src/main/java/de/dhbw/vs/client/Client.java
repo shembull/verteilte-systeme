@@ -6,8 +6,8 @@ import java.net.*;
 public class Client {
 
     private DatagramSocket socket;
-    public Client(int port) throws SocketException, UnknownHostException {
-        socket = new DatagramSocket(port, Inet4Address.getLocalHost());
+    public Client(int port, InetAddress inetAddress) throws SocketException {
+        socket = new DatagramSocket(port, inetAddress);
     }
 
     public void send(DatagramPacket p) throws IOException {

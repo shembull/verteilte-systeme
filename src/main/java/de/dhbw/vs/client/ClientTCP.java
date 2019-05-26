@@ -15,21 +15,23 @@ public class ClientTCP {
     private Socket socket;
     private Logger log;
     private int port;
+    private InetAddress inetAddress;
 
 
     static {
         Logging.setLoggingDefaults(LogLevel.DEBUG, "[%-5p; %c{1}::%M] %m%n");
     }
 
-    public ClientTCP(int port) throws IOException {
+    public ClientTCP(int port, InetAddress inetAddress) throws IOException {
         this.log = LoggerFactory.getLogger(ClientTCP.class);
         this.port = port;
-        this.socket = new Socket(InetAddress.getLocalHost(), this.port);
+        this.inetAddress = inetAddress;
+        this.socket = new Socket(this.inetAddress, this.port);
     }
 
     public void send(String data) throws IOException {
         if (this.socket.isClosed()){
-            this.socket = new Socket(InetAddress.getLocalHost(), this.port);
+            this.socket = new Socket(this.inetAddress, this.port);
         }
         //log.debug("Creating writer");
         BufferedWriter writer = new BufferedWriter(

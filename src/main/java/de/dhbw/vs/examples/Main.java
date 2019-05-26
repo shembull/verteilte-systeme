@@ -12,10 +12,7 @@ import de.dhbw.vs.utils.logging.Logging;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +27,14 @@ public class Main {
 		// Obtain an instance of a logger for this class
 		Logger log = LoggerFactory.getLogger(Main.class);
 
+		try {
+			InetAddress inet4 = Inet4Address.getByName("192.168.178.22");
+			System.out.println(inet4);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+
+
 		// Output a simple log statement
 		/*log.info("Hallo Welt!");
 		System.out.println("Hallo Welt!".getBytes());*/
@@ -40,7 +45,7 @@ public class Main {
 			if(args[1].equals("client")){
 				log.debug("Task2-1, client started...");
 				try {
-					Client client = new Client(12345);
+					Client client = new Client(12345, InetAddress.getByName(args[2]));
 					String str;
 					InetAddress inet = client.getInet();
 
@@ -58,7 +63,7 @@ public class Main {
 			else if(args[1].equals("server")){
 				log.debug("Task2-1, server started...");
 				try {
-					Server server = new Server(11111);
+					Server server = new Server(11111, InetAddress.getByName(args[2]));
 					while (true) {
 						server.receive();
 					}
@@ -76,7 +81,7 @@ public class Main {
 				log.debug("Task2-2, client started...");
 				ClientTCP clientTCP;
 				try {
-					clientTCP = new ClientTCP(11111);
+					clientTCP = new ClientTCP(11111, InetAddress.getByName(args[2]));
 					String str;
 
 					for (int i = 0; i < 20; i++) {
@@ -92,7 +97,7 @@ public class Main {
 			else if(args[1].equals("server")) {
 				log.debug("Task2-2, server started...");
 				try {
-					new ServerTCP(11111, 500);
+					new ServerTCP(11111, 500, InetAddress.getByName(args[2]));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
