@@ -11,7 +11,6 @@ import de.dhbw.vs.utils.logging.LogLevel;
 import de.dhbw.vs.utils.logging.Logging;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.*;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -26,28 +25,19 @@ public class Main {
 	public static void main(String[] args) {
 		// Obtain an instance of a logger for this class
 		Logger log = LoggerFactory.getLogger(Main.class);
-
-		try {
-			InetAddress inet4 = Inet4Address.getByName("192.168.178.22");
-			System.out.println(inet4);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-
-
 		// Output a simple log statement
 		/*log.info("Hallo Welt!");
 		System.out.println("Hallo Welt!".getBytes());*/
-		System.out.println(Arrays.toString(args));
+		log.debug(Arrays.toString(args));
 		if(args[0].equals("task2-1")){
 			// task 2-1
 			//////////////////////////////////////////////////////////////////////////////////////
 			if(args[1].equals("client")){
 				log.debug("Task2-1, client started...");
 				try {
-					Client client = new Client(12345, InetAddress.getByName(args[2]));
+					Client client = new Client(12345, InetAddress.getByName("localhost"));
 					String str;
-					InetAddress inet = client.getInet();
+					InetAddress inet = InetAddress.getByName(args[2]);
 
 					for (int i = 0; i < 20; i++) {
 						str = "Hallo Welt # " + i + " @" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ").format(new java.util.Date());
@@ -64,7 +54,8 @@ public class Main {
 				log.debug("Task2-1, server started...");
 				try {
 					Server server = new Server(11111, InetAddress.getByName(args[2]));
-					while (true) {
+                    //noinspection InfiniteLoopStatement
+                    while (true) {
 						server.receive();
 					}
 				} catch (IOException e) {
