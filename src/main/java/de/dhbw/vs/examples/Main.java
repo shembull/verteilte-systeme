@@ -35,7 +35,7 @@ public class Main {
 			if(args[1].equals("client")){
 				log.debug("Task2-1, client started...");
 				try {
-					Client client = new Client(12345, InetAddress.getByName("localhost"));
+					Client client = new Client(12345, InetAddress.getByName(args[2]));
 					String str;
 					InetAddress inet = InetAddress.getByName(args[2]);
 
