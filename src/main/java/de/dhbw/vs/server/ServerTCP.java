@@ -54,9 +54,11 @@ public class ServerTCP {
     private void read() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         //log.debug("Start reading data");
+        String text = "";
         while (reader.read() > -1){
             //log.debug(Integer.toString(reader.read()));
-            log.info(reader.readLine());
+            text = reader.readLine();
+            log.info(text);
         }
         //log.debug("Finished reading data");
         BufferedWriter writer = new BufferedWriter(
@@ -65,7 +67,7 @@ public class ServerTCP {
                 )
         );
 
-        writer.write(" Anfrage verarbeitet\n");
+        writer.write(" Anfrage verarbeitet Client Nr.: " + text.substring(text.length() - 1));
         writer.flush();
     }
 

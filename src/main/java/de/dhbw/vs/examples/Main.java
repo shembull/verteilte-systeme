@@ -2,6 +2,7 @@ package de.dhbw.vs.examples;
 
 import de.dhbw.vs.client.Client;
 import de.dhbw.vs.client.ClientTCP;
+import de.dhbw.vs.enclosingclass.EnclosingClassClientTCP;
 import de.dhbw.vs.server.Server;
 import de.dhbw.vs.server.ServerTCP;
 import org.slf4j.Logger;
@@ -70,18 +71,8 @@ public class Main {
 			//////////////////////////////////////////////////////////////////////////////////////////
 			if(args[1].equals("client")){
 				log.debug("Task2-2, client started...");
-				ClientTCP clientTCP;
-				try {
-					clientTCP = new ClientTCP(11111, InetAddress.getByName(args[2]));
-					String str;
-
-					for (int i = 0; i < 20; i++) {
-						str = " Hallo Welt # " + i + " @" + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ").format(new java.util.Date()) + "\n";
-						clientTCP.send(str);
-						TimeUnit.MILLISECONDS.sleep(500);
-					}
-				} catch (IOException | InterruptedException e) {
-					e.printStackTrace();
+				for (int i = 0; i < Integer.parseInt(args[3]); i++){
+					new EnclosingClassClientTCP(i, args[2]);
 				}
 
 			}
