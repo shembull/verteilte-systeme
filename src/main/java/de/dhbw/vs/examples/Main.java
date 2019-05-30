@@ -72,7 +72,9 @@ public class Main {
 			if(args[1].equals("client")){
 				log.debug("Task2-2, client started...");
 				for (int i = 0; i < Integer.parseInt(args[3]); i++){
-					new EnclosingClassClientTCP(i, args[2]);
+					EnclosingClassClientTCP ecc = new EnclosingClassClientTCP(i, args[2]);
+					Thread thread = new Thread(ecc);
+					thread.start();
 				}
 
 			}
