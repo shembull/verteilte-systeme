@@ -1,7 +1,6 @@
-package de.dhbw.vs.examples;
+package de.dhbw.vs.main;
 
 import de.dhbw.vs.client.Client;
-import de.dhbw.vs.client.ClientTCP;
 import de.dhbw.vs.enclosingclass.EnclosingClassClientTCP;
 import de.dhbw.vs.server.Server;
 import de.dhbw.vs.server.ServerTCP;
@@ -88,5 +87,4 @@ public class Main {
 			}
 		}
 	}
-
 }

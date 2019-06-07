@@ -50,7 +50,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>de.dhbw.vs.examples.Main</mainClass>
+					<mainClass>de.dhbw.vs.main.Main</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -70,7 +70,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>de.dhbw.vs.examples.Main</mainClass>
+							<mainClass>de.dhbw.vs.main.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
